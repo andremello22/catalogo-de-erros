@@ -1,7 +1,5 @@
 // db.tsx
 import { openDB } from 'idb';
-import { useState} from 'react';
-import { useEffect } from 'react';
 
 // Definir uma interface para os dados de erro
 interface ErrorData {
