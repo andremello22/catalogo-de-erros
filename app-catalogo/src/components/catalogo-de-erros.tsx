@@ -30,13 +30,14 @@ export  function CatalogoErros() {
           }}
             noValidate
             autoComplete="off">
-             <h1 style={{
+              <h1 style={{
               color: '#ffff',
               fontSize: '3em',
               fontWeight: 'bold',
               textAlign: 'center',
               marginTop: '20px'
              }}>Catálogo de erros</h1>
+           
              <TabelaDEErros />
             
              <Botoes />
