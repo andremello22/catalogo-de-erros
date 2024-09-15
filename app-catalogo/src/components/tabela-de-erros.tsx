@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useSelecionado } from './global';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,8 +9,9 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Radio from '@mui/material/Radio';
-import { useState, useEffect } from 'react';
 import { getItems } from './db'; // Função que busca os dados dinâmicos
+
+
 
 // Definição das colunas da tabela
 const columns: { id: string; label: string; minWidth?: number; align?: 'right' | 'center' | 'left' }[] = [
@@ -19,12 +21,11 @@ const columns: { id: string; label: string; minWidth?: number; align?: 'right' |
   { id: 'cod', label: 'Código', minWidth: 170, align: 'right' },
   { id: 'descricao', label: 'Descrição', minWidth: 500, align: 'right' },]
 
-export default function TabelaDEErros() {
+export  function TabelaDEErros() {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [items, setItems] = useState<any[]>([]); // Itens dinâmicos
-  const [selectedValue, setSelectedValue] = useState<number | null>(null); // Estado do item selecionado
-
+  const { selectedId, setSelectedId } = useSelecionado();
   // Carregar dados do IndexedDB
   useEffect(() => {
     const loadItems = async () => {
@@ -44,8 +45,10 @@ export default function TabelaDEErros() {
   };
 
   const handleSelectRow = (id: number) => {
-    setSelectedValue(id); // Atualiza o estado com o ID do item selecionado
+    setSelectedId(id); // Atualiza o estado com o ID do item selecionado
   };
+
+ 
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
@@ -65,7 +68,7 @@ export default function TabelaDEErros() {
           </TableHead>
           <TableBody>
             {items.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row: any) => {
-              const isSelected = row.id === selectedValue;
+              const isSelected = row.id === selectedId
               return (
                 <TableRow
                   hover
@@ -105,5 +108,7 @@ export default function TabelaDEErros() {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+   
   );
+  
 }

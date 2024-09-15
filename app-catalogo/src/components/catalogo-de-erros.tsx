@@ -3,11 +3,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import {Botoes} from './botoes.tsx';
-import TabelaDEErros from './tabela-de-erros.tsx';
+import {TabelaDEErros} from './tabela-de-erros.tsx';
+import { SelecionadoProvider } from './global';
 
 export  function CatalogoErros() {
+   
   return (
     <>
+    <SelecionadoProvider>
       <React.Fragment>
         <CssBaseline />
         <Container maxWidth="xl"
@@ -40,6 +43,7 @@ export  function CatalogoErros() {
           </Box>
         </Container>
       </React.Fragment>
+    </SelecionadoProvider>
     </>
   );
 }

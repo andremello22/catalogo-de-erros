@@ -8,7 +8,6 @@ interface ErrorData {
   cod: string;
   descricao: string;
 }
-
 export const initDB = async () => {
   return openDB('ErrosDB', 1, {
     upgrade(db) {
@@ -33,6 +32,15 @@ export const getItems = async () => {
   const allItems = await store.getAll();
   await tx.done;
   return allItems;
+};
+
+export const deleteItem = async (id: number) => {
+  const db = await initDB();
+  const tx = db.transaction('erros', 'readwrite');
+  const store = tx.objectStore('erros');
+  await store.delete(id);
+  await tx.done; 
+  alert('item Excluído com sucesso');
 };
 
 
